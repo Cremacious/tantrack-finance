@@ -17,6 +17,7 @@ function RouteComponent() {
   return (
     <div className="relative flex h-[calc(100vh-80px)] min-h-[400px] items-center justify-center">
       Hello
+      <Button>Hey</Button>
     </div>
   );
 }
