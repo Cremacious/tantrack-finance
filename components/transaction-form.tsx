@@ -1,6 +1,6 @@
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
   FormControl,
@@ -8,73 +8,77 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form";
+} from './ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
-import { CalendarIcon } from "lucide-react";
-import { addDays, format } from "date-fns";
-import { Calendar } from "./ui/calendar";
-import { Input } from "./ui/input";
-import { categoriesTable } from "@/db/schema";
+} from './ui/select';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { Button } from './ui/button';
+import { cn } from '@/lib/utils';
+import { CalendarIcon } from 'lucide-react';
+import { addDays, format } from 'date-fns';
+import { Calendar } from './ui/calendar';
+import { Input } from './ui/input';
+import { categoriesTable } from '@/db/schema';
 
 export const transactionFormSchema = z.object({
-  transactionType: z.enum(["income", "expense"]),
-  categoryId: z.coerce.number().positive("Please select a category"),
+  transactionType: z.enum(['income', 'expense']),
+  categoryId: z.coerce.number().positive('Please select a category'),
   transactionDate: z
     .date()
-    .max(addDays(new Date(), 1), "Transaction date cannot be in the future"),
-  amount: z.coerce.number().positive("Amount must be greater than 0"),
+    .max(addDays(new Date(), 1), 'Transaction date cannot be in the future'),
+  amount: z.coerce.number().positive('Amount must be greater than 0'),
   description: z
     .string()
-    .min(3, "Description must contain at least 3 characters")
-    .max(300, "Description must contain a maximum of 300 characters"),
+    .min(3, 'Description must contain at least 3 characters')
+    .max(300, 'Description must contain a maximum of 300 characters'),
 });
 
-export function TransactionForm({
-  categories,
-  onSubmit,
-  defaultValues,
-}: {
-  categories: (typeof categoriesTable.$inferSelect)[];
-  onSubmit: (data: z.infer<typeof transactionFormSchema>) => Promise<void>;
-  defaultValues?: {
-    transactionType: "income" | "expense";
-    amount: number;
-    categoryId: number;
-    description: string;
-    transactionDate: Date;
-  };
-}) {
-  const form = useForm<z.infer<typeof transactionFormSchema>>({
-    resolver: zodResolver(transactionFormSchema),
-    defaultValues: {
-      transactionType: "income",
-      amount: 0,
-      categoryId: 0,
-      description: "",
-      transactionDate: new Date(),
-      ...defaultValues,
-    },
-  });
+export function TransactionForm(
+  {
+    // categories,
+    // onSubmit,
+    // defaultValues,
+  }: {
+    // categories: (typeof categoriesTable.$inferSelect)[];
+    // onSubmit: (data: z.infer<typeof transactionFormSchema>) => Promise<void>;
+    // defaultValues?: {
+    //   transactionType: "income" | "expense";
+    //   amount: number;
+    //   categoryId: number;
+    //   description: string;
+    //   transactionDate: Date;
+    // };
+  }
+) {
+  // const form = useForm<z.infer<typeof transactionFormSchema>>({
+  //   resolver: zodResolver(transactionFormSchema),
+  //   defaultValues: {
+  //     transactionType: "income",
+  //     amount: 0,
+  //     categoryId: 0,
+  //     description: "",
+  //     transactionDate: new Date(),
+  //     ...defaultValues,
+  //   },
+  // });
 
-  const filteredCategories = categories.filter(
-    (cat) => cat.type === form.getValues("transactionType")
-  );
+  // const filteredCategories = categories.filter(
+  //   (cat) => cat.type === form.getValues("transactionType")
+  // );
 
   return (
-    <Form {...form}>
+    <div>
+      Form
+      {/* <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <fieldset
           disabled={form.formState.isSubmitting}
-          className="grid grid-cols-2 gap-y-5 gap-x-2"
+          className="grid grid-cols-2 gap-x-2 gap-y-5"
         >
           <FormField
             control={form.control}
@@ -214,6 +218,7 @@ export function TransactionForm({
           </Button>
         </fieldset>
       </form>
-    </Form>
+    </Form> */}
+    </div>
   );
 }
