@@ -1,3 +1,4 @@
+import { createFileRoute, Link, Outlet } from '@tanstack/react-router';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,13 +7,12 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/_authed/dashboard/transactions/_layout')(
-  {
-    component: RouteComponent,
-  }
-);
+export const Route = createFileRoute(
+  '/_authed/dashboard/transactions/new/_layout'
+)({
+  component: RouteComponent,
+});
 
 function RouteComponent() {
   return (
@@ -26,7 +26,13 @@ function RouteComponent() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Transactions</BreadcrumbPage>
+            <BreadcrumbLink asChild>
+              <Link to="/dashboard/transactions">Transactions</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>New Transaction</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
