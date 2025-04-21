@@ -55,17 +55,17 @@ export function TransactionForm(
     // };
   }
 ) {
-  // const form = useForm<z.infer<typeof transactionFormSchema>>({
-  //   resolver: zodResolver(transactionFormSchema),
-  //   defaultValues: {
-  //     transactionType: "income",
-  //     amount: 0,
-  //     categoryId: 0,
-  //     description: "",
-  //     transactionDate: new Date(),
-  //     ...defaultValues,
-  //   },
-  // });
+  const form = useForm<z.infer<typeof transactionFormSchema>>({
+    resolver: zodResolver(transactionFormSchema),
+    defaultValues: {
+      transactionType: "income",
+      amount: 0,
+      categoryId: 0,
+      description: "",
+      transactionDate: new Date(),
+      // ...defaultValues,
+    },
+  });
 
   // const filteredCategories = categories.filter(
   //   (cat) => cat.type === form.getValues("transactionType")
@@ -74,7 +74,7 @@ export function TransactionForm(
   return (
     <div>
       Form
-      {/* <Form {...form}>
+      <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <fieldset
           disabled={form.formState.isSubmitting}
@@ -218,7 +218,7 @@ export function TransactionForm(
           </Button>
         </fieldset>
       </form>
-    </Form> */}
+    </Form>
     </div>
   );
 }
