@@ -29,7 +29,8 @@ import {
 } from '@clerk/tanstack-start';
 import { Button } from '@/components/ui/button';
 import { getSignedInUserId } from '@/data/getSignedInUserId';
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from 'sonner';
+
 
 export const Route = createRootRoute({
   pendingMs: 0,

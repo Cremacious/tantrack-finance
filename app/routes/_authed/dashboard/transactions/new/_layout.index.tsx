@@ -5,9 +5,10 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { createTransaction } from '@/data/createTransactions';
 import { getCategories } from '@/data/getCategories';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { format } from 'date-fns';
 import { z } from 'zod';
+import { toast } from 'sonner';
 
 export const Route = createFileRoute(
   '/_authed/dashboard/transactions/new/_layout/'
@@ -21,7 +22,7 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const { categories } = Route.useLoaderData();
-
+  const navigate = useNavigate();
   const handleSubmit = async (data: z.infer<typeof transactionFormSchema>) => {
     const transaction = await createTransaction({
       data: {
@@ -31,8 +32,17 @@ function RouteComponent() {
         transactionDate: format(data.transactionDate, 'yyyy-MM-dd'),
       },
     });
+    toast.success('Transaction created successfully', {
+      className: 'bg-green-500 text-white',
+    });
+    navigate({
+      to: '/dashboard/transactions',
+      search: {
+        month: data.transactionDate.getMonth() + 1,
+        year: data.transactionDate.getFullYear(),
+      }
+    });
   };
-
   return (
     <div>
       <Card className="mt-4 max-w-screen-md">
