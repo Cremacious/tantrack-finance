@@ -38,26 +38,22 @@ export const transactionFormSchema = z.object({
     .max(300, 'Description must contain a maximum of 300 characters'),
 });
 
-export function TransactionForm(
-  {
-    // categories,
-    // onSubmit,
-    // defaultValues,
-  }: {
-    // categories: (typeof categoriesTable.$inferSelect)[];
-    // onSubmit: (data: z.infer<typeof transactionFormSchema>) => Promise<void>;
-    // defaultValues?: {
-    //   transactionType: "income" | "expense";
-    //   amount: number;
-    //   categoryId: number;
-    //   description: string;
-    //   transactionDate: Date;
-    // };
-  }
-) {
-  const onSubmit = async (data: z.infer<typeof transactionFormSchema>) => {
-    console.log('Form submitted:', data);
-  };
+export function TransactionForm({
+  categories,
+  onSubmit,
+  // defaultValues,
+}: {
+  categories: (typeof categoriesTable.$inferSelect)[];
+  onSubmit: (data: z.infer<typeof transactionFormSchema>) => Promise<void>;
+  // defaultValues?: {
+  //   transactionType: "income" | "expense";
+  //   amount: number;
+  //   categoryId: number;
+  //   description: string;
+  //   transactionDate: Date;
+  // };
+}) {
+
   const form = useForm<z.infer<typeof transactionFormSchema>>({
     resolver: zodResolver(transactionFormSchema),
     defaultValues: {
@@ -70,9 +66,9 @@ export function TransactionForm(
     },
   });
 
-  // const filteredCategories = categories.filter(
-  //   (cat) => cat.type === form.getValues("transactionType")
-  // );
+  const filteredCategories = categories.filter(
+    (cat) => cat.type === form.getValues('transactionType')
+  );
 
   return (
     <div>
@@ -124,14 +120,14 @@ export function TransactionForm(
                           <SelectValue placeholder="Category" />
                         </SelectTrigger>
                         <SelectContent>
-                          {/* {filteredCategories.map((category) => (
-                          <SelectItem
-                            key={category.id}
-                            value={category.id.toString()}
-                          >
-                            {category.name}
-                          </SelectItem>
-                        ))} */}
+                          {filteredCategories.map((category) => (
+                            <SelectItem
+                              key={category.id}
+                              value={category.id.toString()}
+                            >
+                              {category.name}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </FormControl>
