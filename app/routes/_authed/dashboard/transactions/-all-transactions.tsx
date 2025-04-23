@@ -26,19 +26,19 @@ export function AllTransactions({
   yearsRange,
   month,
   year,
-  // transactions,
+  transactions,
 }: {
   yearsRange: number[];
   month: number;
   year: number;
-  // transactions: {
-  //   id: number;
-  //   description: string;
-  //   amount: string;
-  //   category: string | null;
-  //   transactionType: 'income' | 'expense' | null;
-  //   transactionDate: string;
-  // }[];
+  transactions: {
+    id: number;
+    description: string;
+    amount: string;
+    category: string | null;
+    transactionType: 'income' | 'expense' | null;
+    transactionDate: string;
+  }[];
 }) {
   const router = useRouter();
   const [selectedMonth, setSelectedMonth] = useState(month);
@@ -99,12 +99,12 @@ export function AllTransactions({
         <Button asChild>
           <Link to="/dashboard/transactions/new">New Transaction</Link>
         </Button>
-        {/* {!transactions.length && (
+        {!transactions.length && (
           <p className="py-10 text-center text-lg text-muted-foreground">
             There are no transactions for this month
           </p>
-        )} */}
-        {/* {!!transactions.length && (
+        )}
+        {!!transactions.length && (
           <Table className="mt-4">
             <TableHeader>
               <TableRow>
@@ -163,7 +163,7 @@ export function AllTransactions({
               ))}
             </TableBody>
           </Table>
-        )} */}
+        )}
       </CardContent>
     </Card>
   );
